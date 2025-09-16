@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thyroid Cancer Risk Index Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .option-item {
+            display: flex;
+            align-items: center;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+        .disclaimer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Thyroid Nodule Risk Index</h1>
+        <p style="text-align: center;">This tool is for informational purposes only. It simulates a risk assessment based on clinical guidelines but is not a substitute for a professional medical evaluation. Consult with a healthcare provider for any health concerns. 🩺</p>
+    </header>
+
+    <form id="thyroidRiskForm">
+        <div class="form-section">
+            <h2>Patient Information</h2>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="0" max="120" required>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="option-group">
+                    <div class="option-item">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Ultrasound Findings</h2>
+            <div class="form-group">
+                <label for="noduleSize">Nodule Size (in cm):</label>
+                <input type="number" id="noduleSize" name="noduleSize" step="0.1" min="0" required>
+            </div>
+            <div class="form-group">
+                <label>Composition:</label>
+                <select id="composition" name="composition" required>
+                    <option value="">Select...</option>
+                    <option value="cystic">Cystic</option>
+                    <option value="spongiform">Spongiform</option>
+                    <option value="mixed">Mixed Solid and Cystic</option>
+                    <option value="solid">Solid or Almost Solid</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Margin:</label>
+                <select id="margin" name="margin" required>
+                    <option value="">Select...</option>
+                    <option value="well-defined">Well-defined, smooth</option>
+                    <option value="ill-defined">Ill-defined, irregular</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Suspicious Features (check all that apply):</label>
+                <div class="option-group">
+                    <div class="option-item">
+                        <input type="checkbox" id="microcalcifications" name="features" value="microcalcifications">
+                        <label for="microcalcifications">Microcalcifications</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="tallerThanWide" name="features" value="tallerThanWide">
+                        <label for="tallerThanWide">Taller-than-Wide Shape</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="extranodalExtension" name="features" value="extranodalExtension">
+                        <label for="extranodalExtension">Extranodal Extension</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Clinical Risk Factors</h2>
+            <div class="form-group">
+                <label>Family History of Thyroid Cancer?</label>
+                <div class="option-group">
+                    <div class="option-item">
+                        <input type="radio" id="fhYes" name="familyHistory" value="yes" required>
+                        <label for="fhYes">Yes</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="fhNo" name="familyHistory" value="no">
+                        <label for="fhNo">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Calculate Risk</button>
+    </form>
+
+    <div class="disclaimer">
+        <p>This tool is not a medical device. Consult a physician for a proper diagnosis and treatment plan. Data submitted is not stored.</p>
+    </div>
+</div>
+
+</body>
+</html>
